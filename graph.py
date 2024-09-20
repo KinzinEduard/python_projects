@@ -1,17 +1,41 @@
 import typing as tp
 import random
 import numpy as np
-from vector import *
+from PetProjects.vector import *
 import matplotlib.pyplot as plt
 
 
 class Graph:
     def __init__(self, vertexes: tp.Iterable[tp.Any]):
-        self.n = 0
-        self.vertexes: list[tp.Any] = []
-        self.matrix: list[list[int]] = []
+        self.__n = 0
+        self.__vertexes: list[tp.Any] = []
+        self.__matrix: list[list[int]] = []
         self.extend_vertex(vertexes)
-        self.visited = [False] * self.n
+        self.__visited = [False] * self.__n
+
+    @property
+    def n(self):
+        return self.__n
+
+    @n.setter
+    def n(self, value: int):
+        self.__n = value
+
+    @property
+    def vertexes(self):
+        return self.__vertexes
+
+    @property
+    def matrix(self):
+        return self.__matrix
+
+    @property
+    def visited(self):
+        return self.__visited
+
+    @visited.setter
+    def visited(self, value: list[bool]):
+        self.__visited = value
 
     def is_connected(self, v: int, u: int):
         return u in self.matrix[v]
@@ -58,15 +82,38 @@ class Graph:
 
 class GraphNode:
     def __init__(self, pos: Vector2, data: tp.Any):
-        self.pos = pos
-        self.data = data
+        self.__pos = pos
+        self.__data = data
 
+    @property
+    def pos(self):
+        return self.__pos
+
+    @pos.setter
+    def pos(self, value: Vector2):
+        self.__pos = value
+
+    @property
+    def data(self):
+        return self.__data
 
 class GraphVisualization:
     def __init__(self, graph: Graph, min_distance: float = 1):
-        self.graph = graph
-        self.nodes: list[GraphNode] = []
-        self.min_distance = min_distance
+        self.__graph = graph
+        self.__nodes: list[GraphNode] = []
+        self.__min_distance = min_distance
+
+    @property
+    def graph(self):
+        return self.__graph
+
+    @property
+    def nodes(self):
+        return self.__nodes
+
+    @property
+    def min_distance(self):
+        return self.__min_distance
 
     def get_coordinates_rows(self) -> tuple[np.ndarray, np.ndarray]:
         x_data = []
@@ -101,6 +148,7 @@ class GraphVisualization:
                 y2 = self.nodes[v].pos.y
                 plt.plot([x1, x2], [y1, y2])
 
+    @staticmethod
     def show_graph(self):
         plt.show()
 
