@@ -3,8 +3,16 @@ import typing as tp
 
 class Vector:
     def __init__(self, *args: float):
-        self.numbers = args
-        self.n = len(self.numbers)
+        self.__numbers = args
+        self.__n = len(self.numbers)
+
+    @property
+    def numbers(self):
+        return self.__numbers
+
+    @property
+    def n(self):
+        return self.__n
 
     def distance(self, vec: 'Vector'):
         return math.sqrt(sum((a - self.numbers[i]) ** 2 for i, a in enumerate(vec.numbers)))
@@ -54,8 +62,16 @@ class Vector:
 class Vector2(Vector):
     def __init__(self, x: float, y: float):
         Vector.__init__(self, x, y)
-        self.x = x
-        self.y = y
+        self.__x = x
+        self.__y = y
+
+    @property
+    def x(self):
+        return self.__x
+
+    @property
+    def y(self):
+        return self.__y
 
     def distance(self, vec: 'Vector2'):
         return math.sqrt((self.x - vec.x) ** 2 + (self.y - vec.y) ** 2)
@@ -89,9 +105,21 @@ class Vector2(Vector):
 class Vector3(Vector):
     def __init__(self, x: float, y: float, z: float = 0):
         Vector.__init__(self, x, y, z)
-        self.x = x
-        self.y = y
-        self.z = z
+        self.__x = x
+        self.__y = y
+        self.__z = z
+
+    @property
+    def x(self):
+        return self.__x
+
+    @property
+    def y(self):
+        return self.__y
+
+    @property
+    def z(self):
+        return self.__z
 
     def __str__(self):
         return f'x:{self.x} y:{self.y}'
@@ -111,7 +139,3 @@ class Vector3(Vector):
 
     def magnitude(self) -> float:
         return math.sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
-
-
-x, y = Vector3(3, 1, 2)
-print(x, y)
